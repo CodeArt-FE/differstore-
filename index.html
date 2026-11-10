@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Brand DIFFER | البراند الرسمي للملابس</title>
+    <!-- استدعاء الخطوط وأيقونات FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- الشريط الإعلاني العلوي -->
+    <div class="announcement-bar">
+        <span id="announcementText">خصم 20% على تشكيلة الشتاء الجديدة | الشحن مجاني للطلبات فوق 1000 جنيه</span>
+    </div>
+
+    <!-- الهيدر الرئيسي -->
+    <header class="main-header">
+        <div class="header-container">
+            <!-- زر فتح القائمة الجانبية -->
+            <button class="icon-btn menu-btn" id="openMenuBtn" aria-label="Open Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- عنوان البراند واسمك -->
+            <div class="brand-info">
+                <h1 class="brand-logo">Brand DIFFER</h1>
+                <span class="owner-tag">Ahmed</span>
+            </div>
+
+            <!-- أجراءات الهيدر (اللغة، البحث، السلة) -->
+            <div class="header-actions">
+                <button class="icon-btn lang-btn" id="toggleLangBtn" aria-label="Change Language">
+                    <span id="langText">EN</span>
+                </button>
+                <button class="icon-btn search-toggle-btn" id="toggleSearchBtn" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="icon-btn cart-btn" id="openCartBtn" aria-label="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- شريط البحث الفوري -->
+        <div class="search-bar-container" id="searchBarContainer">
+            <input type="text" id="searchInput" placeholder="ابحث عن هودي، تيشيرت، بنطال...">
+            <button id="clearSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </header>
+
+    <!-- القائمة الجانبية (الأقسام: شتوي وصيفي فقط) -->
+    <div class="side-drawer" id="sideDrawer">
+        <div class="drawer-header">
+            <h3 id="menuTitleHeading">الأقسام والتشكيلات</h3>
+            <button class="close-btn" id="closeMenuBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <nav class="drawer-nav">
+            <ul>
+                <li><a href="#" class="filter-category active" data-category="all"><i class="fa-solid fa-border-all"></i> <span id="nav-all">جميع المنتجات</span></a></li>
+                <li><a href="#" class="filter-category" data-category="winter"><i class="fa-solid fa-snowflake"></i> <span id="nav-winter">التشكيلة الشتوية</span></a></li>
+                <li><a href="#" class="filter-category" data-category="summer"><i class="fa-solid fa-sun"></i> <span id="nav-summer">التشكيلة الصيفية</span></a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- قسم البانر (بالصورة الخلفية المخصصة لـ DIFFER) -->
+    <section class="hero-section">
+        <div class="hero-slider">
+            <div class="slide active-slide" style="background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80');">
+                <div class="hero-content">
+                    <h2 id="heroTitleText">BRAND DIFFER COLLECTION</h2>
+                    <p id="heroDescText">تصاميم الستريت وير العصرية لخريف وشتاء 2026</p>
+                    <a href="#productsSection" class="btn-primary" id="heroBtnText">تسوق المجموعة الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم عن البراند -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-card">
+                <h2 id="aboutTitleText">عن براند <span class="highlight">DIFFER</span></h2>
+                <p id="aboutDescText">نحن في Brand DIFFER نمزج بين بساطة التصميم وأعلى جودة خامات الشارع العصري (Streetwear). نسعى لتقديم قطع ملابس فريدة تناسب أسلوب حياتك اليومي.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات والفلاتر السريعة -->
+    <section class="products-section" id="productsSection">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="currentCategoryTitle">جميع المنتجات</h2>
+                <div class="quick-filters">
+                    <button class="quick-filter-btn active" data-category="all" id="filterAllBtn">الكل</button>
+                    <button class="quick-filter-btn" data-category="winter" id="filterWinterBtn">شتوي</button>
+                    <button class="quick-filter-btn" data-category="summer" id="filterSummerBtn">صيفي</button>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <!-- نافذة تفاصيل المنتج (Modal) -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-btn modal-close" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body">
+                <div class="modal-gallery">
+                    <div class="main-image-container">
+                        <img id="modalMainImg" src="" alt="صورة المنتج">
+                    </div>
+                    <div class="thumbnails-container" id="modalThumbnails"></div>
+                </div>
+                <div class="modal-details">
+                    <h2 id="modalTitle">اسم المنتج</h2>
+                    <div class="prices">
+                        <span class="price-current" id="modalPriceCurrent">0 ج.م</span>
+                        <span class="price-old" id="modalPriceOld">0 ج.م</span>
+                        <span class="badge-discount-modal" id="modalDiscountBadge" style="background:#d90429; color:#fff; padding:2px 8px; border-radius:4px; font-size:0.8rem; font-weight:bold;"></span>
+                    </div>
+                    <p class="description" id="modalDescription">وصف المنتج...</p>
+
+                    <div class="options-group">
+                        <label id="modalSizeLabel">اختر المقاس:</label>
+                        <div class="size-options" id="sizeOptions">
+                            <button class="size-btn active" onclick="selectSize(this, 'S')">S</button>
+                            <button class="size-btn" onclick="selectSize(this, 'M')">M</button>
+                            <button class="size-btn" onclick="selectSize(this, 'L')">L</button>
+                            <button class="size-btn" onclick="selectSize(this, 'XL')">XL</button>
+                            <button class="size-btn" onclick="selectSize(this, 'XXL')">XXL</button>
+                        </div>
+                    </div>
+
+                    <div class="options-group">
+                        <label id="modalColorLabel">اختر اللون:</label>
+                        <div class="color-options" id="colorOptions"></div>
+                    </div>
+
+                    <button class="btn-add-cart" id="modalAddToCartBtn">
+                        <i class="fa-solid fa-bag-shopping"></i> <span id="modalAddText">إضافة إلى السلة</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- سلة المشتريات -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3 id="cartTitleText">سلة المشتريات (<span id="cartHeaderCount">0</span>)</h3>
+            <button class="close-btn" id="closeCartBtn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="cart-body">
+            <div class="cart-items" id="cartItemsContainer"></div>
+            <div class="checkout-form-container" id="checkoutFormContainer">
+                <h4 id="deliveryTitleText">بيانات توصيل الطلب</h4>
+                <form id="whatsappCheckoutForm">
+                    <div class="form-group">
+                        <label for="clientName" id="nameLabelText"><i class="fa-solid fa-user"></i> الاسم بالكامل</label>
+                        <input type="text" id="clientName" required placeholder="أدخل اسمك الثلاثي">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientPhone" id="phoneLabelText"><i class="fa-solid fa-phone"></i> رقم الهاتف</label>
+                        <input type="tel" id="clientPhone" required placeholder="01xxxxxxxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="clientAddress" id="addressLabelText"><i class="fa-solid fa-location-dot"></i> العنوان بالتفصيل</label>
+                        <textarea id="clientAddress" rows="2" required placeholder="المحافظة - المنطقة - الشارع"></textarea>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span id="totalLabelText">إجمالي المبلغ:</span>
+                <span class="total-price" id="cartTotalPrice">0 ج.م</span>
+            </div>
+            <button class="btn-whatsapp-submit" id="sendWhatsappBtn">
+                <i class="fa-brands fa-whatsapp"></i> <span id="whatsappBtnText">تأكيد الطلب عبر الواتساب (رقم البراند)</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- الفوتر (رقم بسكو 01029053373) -->
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>Brand DIFFER</h3>
+                <p id="footerDescText">علامة تجارية مصرية مخصصة للستريت وير والأزياء العصرية.</p>
+            </div>
+            <div class="footer-links">
+                <h4 id="footerQuickLinksTitle">روابط سريعة</h4>
+                <ul>
+                    <li><a href="#productsSection" id="footerProdLink">المنتجات</a></li>
+                    <li><a href="#" id="footerAboutLink">عن البراند</a></li>
+                </ul>
+            </div>
+            <div class="footer-developer">
+                <h4 id="footerDevTitle">Design via:-</h4>
+                <div class="contact-whatsapp-box" style="margin-top: 8px;">
+                    <a href="https://wa.me/201029053373" target="_blank" class="footer-wa-link" title="تواصل مع بسكو" style="display: inline-flex; align-items: center; gap: 8px; color: inherit; text-decoration: none;">
+                        <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.3rem;"></i>
+                    </a>
+                    <span id="footerDevName">Developed with:(𝓑𝓪 𝓼 𝓴𝓸 🫣♥️)</span>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p id="footerRightsText">&copy; 2026 جميع الحقوق محفوظة لبراند DIFFER.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
